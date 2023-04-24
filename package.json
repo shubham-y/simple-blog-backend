@@ -1,0 +1,44 @@
+{
+  "name": "simple-blog-backend",
+  "version": "1.0.0",
+  "description": "Backend APIs for a simple blog",
+  "main": "index.js",
+  "scripts": {
+    "dev": "nodemon server.js",
+    "start": "node server.js",
+    "lint": "eslint ./src",
+    "lint:fix": "eslint --fix ./src"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "bcryptjs": "2.4.3",
+    "compression": "1.7.4",
+    "cookie-parser": "1.4.6",
+    "cors": "2.8.5",
+    "dotenv": "16.0.3",
+    "express": "4.18.2",
+    "express-boom": "3.0.0",
+    "helmet": "6.0.0",
+    "http-status": "1.6.2",
+    "jsonwebtoken": "9.0.0",
+    "mongoose": "7.0.3",
+    "morgan": "1.10.0",
+    "winston": "3.8.2",
+    "winston-daily-rotate-file": "4.7.1",
+    "xss-clean": "0.1.1",
+    "yup": "0.32.11"
+  },
+  "devDependencies": {
+    "nodemon": "2.0.22",
+    "eslint": "8.30.0",
+    "eslint-config-standard": "17.0.0",
+    "eslint-plugin-import": "2.26.0",
+    "eslint-plugin-n": "15.6.0",
+    "eslint-plugin-promise": "6.1.1"
+  },
+  "engines": {
+    "node": "16.x"
+  }
+}
