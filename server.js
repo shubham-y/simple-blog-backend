@@ -8,11 +8,12 @@ const { UNHANDLED_ERRORS, SERVER_SIGNALS } = require( './src/constants' )
 dotenv.config()
 
 const port = Number( process.env.PORT ) || 5000
+const host = process.env.HOST
 
 const server = http.createServer( app )
 
-server.listen( port, () => {
-  logger.info( `SBB app listening on ${port} with environment ${process.env.NODE_ENV}` )
+server.listen( port, host, () => {
+  logger.info( `SBB app listening on ${host}:${port} with environment ${process.env.NODE_ENV}` )
 } )
 
 const responseTimeout = Number( process.env.SERVER_TIMEOUT ) || 90000 // response timeout
