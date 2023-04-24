@@ -3,7 +3,7 @@ const httpStatus = require( 'http-status' )
 
 dotenv.config()
 
-const allowedOriginList = process.env.CORS_ORIGINS.split( ', ' )
+const allowedOriginList = '*'
 const allowedMethods = process.env.CORS_METHODS
 
 const corsOptions = {
