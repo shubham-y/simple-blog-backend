@@ -7,24 +7,25 @@ const { User } = require( './model' )
 const updateUser = async ( req, res ) => {
   try {
     const userId = req.params.user_id
-    const updatedUser = await User.findByIdAndUpdate( userId, {
+    const response = await User.updateOne( { _id: userId }, {
       name: req.body.name,
       age: req.body.age,
     },
     )
+    if ( !response.acknowledged ) {
+      throw new Error( 'Unable to update user' )
+    }
 
     return res.status( httpStatus.OK ).json( {
       statusCode: httpStatus.OK,
       message: 'Successfully updated the user',
-      data: {
-        data: updatedUser,
-      },
+      data: null,
       error: null,
     },
     )
   } catch ( error ) {
     logger.error( 'Error in updateUser', error )
-    return res.boom( Boom.badImplementation( 'Unable to updateUser' ) )
+    return res.boom( Boom.badImplementation( 'Unable to update user' ) )
   }
 }
 

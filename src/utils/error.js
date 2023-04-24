@@ -19,6 +19,9 @@ const createErrorResponse = ( req, res, next ) => {
     let boomResponse
 
     if ( boomError.isBoom ) {
+      boomError.output.payload.message = boomError.message
+        ? boomError.message
+        : boomError.output.payload.message
       boomResponse = {
         ...boomError.output.payload,
         ...boomError.data || { data: null },
