@@ -5,12 +5,13 @@ const xss = require( 'xss-clean' )
 const compression = require( 'compression' )
 const dotenv = require( 'dotenv' )
 const morgan = require( 'morgan' )
-const boom = require( 'express-boom' )
+const Boom = require( '@hapi/boom' )
 const cookieParser = require( 'cookie-parser' )
 
 const routes = require( './router' )
 const { connectDb } = require( './config/db' )
 const { corsOptions } = require( './config/corsOptions' )
+const { createErrorResponse } = require( './utils/error' )
 const logger = require( './config/logger' )
 
 
@@ -21,7 +22,7 @@ const createApp = () => {
   dotenv.config()
 
   // error middleware
-  app.use( boom() )
+  app.use( createErrorResponse )
 
   // initializing mongoDB
   connectDb()
