@@ -3,7 +3,7 @@ const { ValidationError } = require( 'yup' )
 
 const logger = require( '../../config/logger' )
 const { comparePassword } = require( '../../utils/password' )
-const { User } = require( './model' )
+const { User } = require( '../users/model' )
 const { signUpSchema, signInSchema } = require( './schema' )
 const { formatValidationError } = require( '../../utils/error' )
 
@@ -55,7 +55,7 @@ const isEmailExist = async ( req, res, next ) => {
       return res.boom( Boom.unauthorized( 'Invalid user credentials' ) )
     }
     req.userData = userData
-    return next()
+    next()
   } catch ( error ) {
     logger.error( 'Unable to check email', error )
     return res.boom( Boom.badImplementation( 'Unable to check email' ) )
@@ -68,7 +68,7 @@ const isPasswordCorrect = async ( req, res, next ) => {
     if ( !isPasswordCorrect ) {
       return res.boom( Boom.unauthorized( 'Invalid user credentials' ) )
     }
-    return next()
+    next()
   } catch ( error ) {
     logger.error( 'Unable to check password', error )
     return res.boom( Boom.badImplementation( 'Unable to check password' ) )

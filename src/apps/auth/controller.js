@@ -3,10 +3,10 @@ const Boom = require( '@hapi/boom' )
 
 const logger = require( '../../config/logger' )
 const { hashPassword } = require( '../../utils/password' )
-const { User } = require( './model' )
+const { User } = require( '../users/model' )
 const { generateAuthToken } = require( './utils' )
 
-const signup = async ( req, res, next ) => {
+const signup = async ( req, res ) => {
   try {
     const hashedPassword = await hashPassword( req.body.password )
     const user = await User.create( {
@@ -16,11 +16,20 @@ const signup = async ( req, res, next ) => {
       age: req.body.age,
     } )
 
+    const userData = {
+      id: user.id,
+      name: user.name,
+      email: user.email,
+      age: user.age,
+      created_at: user.createdAt,
+      updated_at: user.updatedAt,
+    }
+
     return res.status( httpStatus.OK ).json( {
       statusCode: httpStatus.OK,
       message: 'Successful signup',
       data: {
-        data: user,
+        data: userData,
       },
       error: null,
     },
@@ -31,7 +40,7 @@ const signup = async ( req, res, next ) => {
   }
 }
 
-const login = async ( req, res, next ) => {
+const login = async ( req, res ) => {
   try {
     const token = await generateAuthToken( {
       user_id: req.userData.id,
@@ -39,9 +48,10 @@ const login = async ( req, res, next ) => {
     const user = {
       id: req.userData.id,
       name: req.userData.name,
-      email: req.body.email,
-      created_at: req.userData.created_at,
-      updated_at: req.userData.updated_at,
+      email: req.userData.email,
+      age: req.userData.age,
+      created_at: req.userData.createdAt,
+      updated_at: req.userData.updatedAt,
     }
 
     return res.status( httpStatus.OK ).json( {

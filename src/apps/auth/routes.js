@@ -11,7 +11,7 @@ const {
 
 const authRouter = express.Router()
 
-authRouter.post( '/signup', validateSignUp, isUserAlreadyExist, signup )
-authRouter.post( '/login', validateLogin, isEmailExist, isPasswordCorrect, login )
+authRouter.post( '/auth/signup', validateSignUp, isUserAlreadyExist, signup )
+authRouter.post( '/auth/login', validateLogin, isEmailExist, isPasswordCorrect, login )
 
 module.exports = authRouter
