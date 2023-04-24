@@ -5,7 +5,6 @@ const xss = require( 'xss-clean' )
 const compression = require( 'compression' )
 const dotenv = require( 'dotenv' )
 const morgan = require( 'morgan' )
-const Boom = require( '@hapi/boom' )
 const cookieParser = require( 'cookie-parser' )
 
 const routes = require( './router' )
